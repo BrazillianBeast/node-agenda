@@ -1,0 +1,27 @@
+<% if (errors.length > 0) { %>
+  <div class="container">
+    <div class="row">
+        <dix class="col my-3">
+          <div class="alert alert-danger">
+            <% errors.forEach(error => { %>
+                <%= error  %><br>
+            <% }); %>
+          </div>
+        </dix>
+    </div>
+  </div>
+<% } %>
+
+<% if (sucess.length > 0) { %>
+  <div class="container">
+    <div class="row">
+        <dix class="col my-3">
+          <div class="alert alert-success">
+            <% sucess.forEach(sucess => { %>
+                <%= sucess  %><br>
+            <% }); %>
+          </div>
+        </dix>
+    </div>
+  </div>
+<% } %>

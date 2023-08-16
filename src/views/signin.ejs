@@ -1,0 +1,65 @@
+<%- include('includes/head', {
+    title:"Present - Sign in",
+    bootstrap: true,
+}); %>
+
+
+    <main>
+        <%- include('includes/bootnav') %>
+
+            
+        <div class="container-fluid">
+            <%- include('includes/messages') %>
+            <div class="row justify-content-around my-3">
+                <div class="col-3 h-100 p-5 bg-body-transparent border rounded-3 border-dark">
+                    <div class="mb-3">
+                        <h3>Welcome!</h3>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h2>Sign in to</h2>
+                        <p>Present is simple</p>
+                    </div>
+                    
+
+                    <form action="/login/register" method="POST">
+                        <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+                        <div class="mb-3">
+                          <label for="username" class="form-label fw-medium">Username</label>
+                          <input type="username" name="username" class="form-control border-dark" id="username" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                          <label for="email" class="form-label fw-medium">Email address</label>
+                          <input type="email" name="email" class="form-control border-dark" id="email" aria-describedby="emailHelp">
+                          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                        </div>
+                        <div class="mb-3">
+                          <label for="password" class="form-label fw-medium">Password</label>
+                          <input type="password" name="password" class="form-control border-dark" id="inputPassword">
+                        </div>
+                        <div class="mb-3">
+                          <label for="confirmationPassword" class="form-label fw-medium">Confirm password</label>
+                          <input type="password" name="confirmationPassword" class="form-control border-dark" id="confirmationPassword">
+                        </div>
+                        <div class="py-3 mb-5 d-grid gap-2">
+                            <button class="btn btn-dark btn-lg" type="submit">Sign in</button>
+                        </div>
+                        
+                        <div class="text-center">
+                            <p>Already have an account?<a href="/login" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"> Log in</a></p>
+                        </div>
+                      </form>
+
+                </div>
+                <div class="col-4">
+                    <!-- <img width="100%" src="./assets/js/assets/img/team.svg" alt="Team discussing ideas"> -->
+                    <img src="./assets/js/assets/img/team.svg" class="img-fluid" alt="Team discussing ideas">
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+<%- include('includes/footer', {
+    bootstrap: true,
+}); %>

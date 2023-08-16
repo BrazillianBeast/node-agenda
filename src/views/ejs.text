@@ -1,0 +1,11 @@
+<% FLux control (if, for...) %>
+<%= Prints escaping caracters %>
+<%- Prints without escaping caracters %>
+<%# Comments %>
+<%- include('FILEPATH') %>
+
+<% if (something) { %>
+    <% Show something %>
+<%  } else { %>
+    <% Shows something else %>
+<% } %>
