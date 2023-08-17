@@ -17,6 +17,24 @@ class Login {
         this.errors = [];
         this.user = null;
     }
+    
+    async login(){
+        this.validateLogin();
+        if(this.errors.length > 0) return;
+        this.user = await LoginModel.findOne({ email: this.body.email });
+
+        if(!this.user){
+            this.errors.push('Invalid user or password');
+            return;
+            }
+
+        if(!bcryptjs.compareSync(this.body.password, this.user.password)){
+            this.errors.push('Invalid user or password');
+            this.user = null;
+            return;
+        }
+
+    }
 
     async register() {
         this.validate();
@@ -65,6 +83,15 @@ class Login {
         if(this.body.confirmationPassword !== this.body.password){
             this.errors.push(`The password confirmation does not match the password`);
             console.log(this.body);
+        }
+    }
+
+    validateLogin() {
+        this.cleanUp();
+        if(!validator.isEmail(this.body.email)) this.errors.push('Invalid email');
+        
+        if(this.body.password.length < 3 || this.body.password.length > 50){
+            this.errors.push('The password must be between 3 and 50 characters')
         }
     }
 

@@ -1,12 +1,15 @@
-<!-- As a link -->
-<nav class="navbar bg-white mx-5 my-2">
-  
-    <div class="container-fluid">
-      <a class="navbar-brand text-dark fw-medium " href="#">Present</a>
+<nav class="py-2 bg-body-white">
+  <div class="container d-flex flex-wrap">
+    <ul class="nav me-auto">
+      <li class="nav-item"><a href="/" class="nav-link link-body-emphasis px-2 active fw-bold" aria-current="page">Present</a></li>
+      
+    </ul>
 
-      <span class="navbar-text">
-        Navbar text with an inline element
-      </span>
-    </div>
+    <% if(user) { %>
+    <ul class="nav">
+      <li class="nav-item"><a href="/contact/index" class="nav-link link-body-emphasis px-2">Create contact</a></li>
+      <li class="nav-item"><a href="/login/logout" class="nav-link link-body-emphasis px-2">Log out</a></li>
+    </ul>
+    <% } %>
+  </div>
 </nav>
-  

@@ -1,0 +1,50 @@
+<%- include('includes/head', {
+    title:"Present - Manage your contacs",
+    bootstrap: true,
+  }); %>
+  
+      <%- include('includes/bootnav') %>
+  
+      <div class="container border rounded ">
+        <div class="row">
+          <div class="col-lg-2"></div>
+  
+          <div class="col-lg-8 my-5">
+            <h1 class="text-center">Contact</h1>
+            <p class="text-center lead">Create/Edit your contact down below.</p>
+  
+            <%- include('includes/messages') %>
+
+            <form action="/contact/register" method="POST">
+                <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+                <div class="mb-3">
+                  <label for="name" class="form-label fw-medium">Name</label>
+                  <input value="<%= contact.name %>" type="text" name="name" class="form-control border-dark" id="name" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="lastName" class="form-label fw-medium">Last name</label>
+                  <input value="<%= contact.lastName %>" type="text" name="lastName" class="form-control border-dark" id="lastName" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label fw-medium">Email</label>
+                  <input value="<%= contact.email %>" type="email" name="email" class="form-control border-dark" id="email" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="telephone" class="form-label fw-medium">Telephone</label>
+                  <input value="<%= contact.telephone %>" type="tel" name="telephone" class="form-control border-dark" id="telephone" aria-describedby="emailHelp">
+                </div>
+                <div class="py-3 mb-5 d-grid gap-2">
+                    <button class="btn btn-dark btn-lg" type="submit">Save</button>
+                </div>
+                
+              </form>
+  
+            
+          </div>
+        </div>
+      </div>
+  
+  
+  <%- include('includes/footer', {
+    bootstrap: true,
+  }); %>
