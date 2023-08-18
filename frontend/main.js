@@ -7,6 +7,7 @@ console.log('app loaded');
 
 var img = document.createElement('img');
 img.src = require('./assets/img/team.svg');
+img.src = require('./assets/img/zen32.png');
 // img.src = require('./assets/js/assets/team.svg');
 // img.width = '100%';
 // var element = document.getElementById('imageBox');

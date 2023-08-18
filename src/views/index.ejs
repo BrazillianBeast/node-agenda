@@ -15,16 +15,25 @@
 
           <%- include('includes/messages') %>
 
+          <% if( contacts.length > 0 ){ %>
           <div class="responsive-table">
-            <table class="table my-3">
-              <tr>
-                <td>Marine</td>
-                <td>Houdaille</td>
-                <td>+1 (484) 9994402</td>
-                <td>marine.houdaille@gmail.com</td>
-              </tr>
-            </table>
-          </div>
+            <table class="table my-5">
+                <% contacts.forEach(contact => { %>
+                  <tr>
+                    <td><%= contact.name %></td>
+                    <td><%= contact.lastName %></td>
+                    <td><%= contact.telephone %></td>
+                    <td><%= contact.email %></td>
+                    <td><a class="link-offset-2 link-underline link-underline-opacity-0" href="/contact/index/<%= contact._id %>">Edit</a></td>
+                    <td><a class="text-danger link-offset-2 link-underline link-underline-opacity-0" href="/contact/delete/<%= contact._id %>">Delete</a></td>
+                  </tr>
+                <% }) %>
+              </table>
+            </div>
+          <% } else { %>
+              <p class="text-center py-5">Your don't have any contact registered, click on <strong>Create a contact</strong> to start</p>
+          <% }  %>
+              
 
         </div>
       </div>

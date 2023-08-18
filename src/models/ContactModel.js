@@ -6,7 +6,7 @@ const ContactSchema = new mongoose.Schema({
     lastName: { type: String, required: false, default: '' },
     email: { type: String, required: false, default: '' },
     telephone: { type: String, required: false, default: '' },
-    createAt: { type: Date, default: Date.now() }
+    createdAt: { type: Date, default: Date.now() }
 });
 
 const ContactModel = mongoose.model('Contact', ContactSchema);
@@ -19,13 +19,6 @@ function Contact(body){
     this.errors = [];
     this.contact = null;
 }
-
-// Static function, we dont need to have a class created to use this method
-Contact.searchById = async function(id){
-    if(typeof id !== 'string') return;
-    const user = await ContactModel.findById(id);
-    return user;
-};
 
 Contact.prototype.register = async function(){
     this.validate();
@@ -59,6 +52,39 @@ Contact.prototype.cleanUp = function () {
         email: this.body.email,
         telephone: this.body.telephone,
     };
+};
+
+Contact.prototype.edit = async function (id){
+    if(typeof id !== 'string') return;
+    this.validate();
+    if(this.errors.length > 0) return;
+
+    // new will bring the updated contact
+    this.contact = await ContactModel.findByIdAndUpdate(id, this.body);
+};
+
+//STATIC FUNCTIONS
+// Static function, we dont need to have a class created to use this method
+Contact.searchById = async function(id){
+    if(typeof id !== 'string') return;
+    const contact = await ContactModel.findById(id);
+    return contact;
+};
+
+
+// 1 Iscreasing order
+// -1 Descreasing order
+Contact.contactsSearch = async function(){
+    const contacts = await ContactModel.find()
+        .sort({ createdAt: -1 });
+    return contacts;
+};
+
+
+Contact.delete = async function(id){
+    if(typeof id !== 'string') return;
+    const contact = await ContactModel.findOneAndDelete({_id: id});
+    return contact;
 };
 
 module.exports = Contact;

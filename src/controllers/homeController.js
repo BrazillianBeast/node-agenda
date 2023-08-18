@@ -1,25 +1,16 @@
-const { version } = require('mongoose');
-const HomeModel = require('../models/HomeModel');
+const Contact = require('../models/ContactModel');
 
-exports.homePage = (req, res) =>  {
+exports.homePage = async(req, res) =>  {
     if (req.session.user){
-        // tentar colocar qualquer coisa em locals e ver
-        // se passa
-        res.render('index');
+        const contacts = await Contact.contactsSearch();
+        res.render('index', { contacts });
     }
     else {
         res.render('login'); 
     }
-    // res.render('index', {
-    //     title: 'This is the <span style="color:#115666;">title</span>',
-    //     numbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    // }); 
     return;
 }
 
-exports.treatPost = (req, res) => {
-    res.send(req.body);
-    return;
-};
+
 
 
