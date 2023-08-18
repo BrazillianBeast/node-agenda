@@ -74,6 +74,10 @@ class Login {
         // Validation
         // The email needs to be valid
         if(!validator.isEmail(this.body.email)) this.errors.push('Invalid email');
+
+        if(!this.body.email) this.errors.push('Email is required');
+
+        if(!this.body.username) this.errors.push('Username is required');
         
         // Password needs to have between 3 to 50 characters
         if(this.body.password.length < 3 || this.body.password.length > 50){

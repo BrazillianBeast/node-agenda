@@ -6,7 +6,8 @@ const ContactSchema = new mongoose.Schema({
     lastName: { type: String, required: false, default: '' },
     email: { type: String, required: false, default: '' },
     telephone: { type: String, required: false, default: '' },
-    createdAt: { type: Date, default: Date.now() }
+    createdAt: { type: Date, default: Date.now() },
+    userOwner: { type: String, required: true, default: ''},
 });
 
 const ContactModel = mongoose.model('Contact', ContactSchema);
@@ -14,8 +15,9 @@ const ContactModel = mongoose.model('Contact', ContactSchema);
 // This model is created using constructor functions
 //  instead of classes both works with JS
 
-function Contact(body){
+function Contact(body, userOwnerUsername){
     this.body = body;
+    this.body.userOwner= userOwnerUsername;
     this.errors = [];
     this.contact = null;
 }
@@ -51,6 +53,7 @@ Contact.prototype.cleanUp = function () {
         lastName: this.body.lastName,
         email: this.body.email,
         telephone: this.body.telephone,
+        userOwner: this.body.userOwner,
     };
 };
 
@@ -74,8 +77,8 @@ Contact.searchById = async function(id){
 
 // 1 Iscreasing order
 // -1 Descreasing order
-Contact.contactsSearch = async function(){
-    const contacts = await ContactModel.find()
+Contact.contactsSearch = async function(userOwner){
+    const contacts = await ContactModel.find({ userOwner: userOwner.username })
         .sort({ createdAt: -1 });
     return contacts;
 };

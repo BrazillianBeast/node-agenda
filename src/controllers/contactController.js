@@ -8,7 +8,7 @@ exports.index = (req, res) => {
 
 exports.register = async (req,res) => {
     try {
-        const contact = new Contact(req.body);
+        const contact = new Contact(req.body, res.locals.user.username);
         await contact.register();
     
         if (contact.errors.length > 0){
@@ -39,7 +39,7 @@ exports.editByIndex = async function(req, res){
 exports.edit = async function(req,res){
     try{
         if(!req.params.id) return res.render('404');
-        const contact = new Contact(req.body);
+        const contact = new Contact(req.body, res.locals.user.username);
         await contact.edit(req.params.id);
     
         if (contact.errors.length > 0){
